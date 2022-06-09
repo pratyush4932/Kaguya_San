@@ -1047,19 +1047,15 @@ break
 case 'sr':
 case 'subraddit': {
 	if (!ter) return m.reply(`❌ No query provided!`)
-try{
+
 							let Igroup = await group.findOne({ id: m.chat})
 				let hh = Igroup.nsfw || "false"
 				const res = await axios.get('https://meme-api.herokuapp.com/gimme/' + q + '/');
 	if (res.data.nsfw&& hh == 'false') return m.reply("❌ *nsfw* is not active in this group")
-		//if (res.data.code == 400) return m.reply("Subraddit dosen't exsist") 
+		if (!res.data.url) return m.reply("Subraddit dosen't exsist") 
 				arus.sendMessage(m.chat,{image:{url: res.data.url},caption:`🖌️ *Title:* ${res.data.title}\n*👨‍🎨 Author:* ${res.data.author}\n*🎏 Subreddit:* ${res.data.subreddit}\n🌐 *Post:* ${res.data.postLink}`},{quoted:m,})
 
-} catch {
 
-return m.reply("Subraddit dosen't exsist") 
-
-}
 				
 }
 break
@@ -1536,14 +1532,7 @@ case 'neko':{
    waifud = await axios.get('https://waifu.pics/api/sfw/neko')
  arus.sendMessage(m.chat, { image: { url: waifud.data.url }, caption: "Here you go" }, { quoted: m })
  }             
-                break                               
- case 'holo':
-case 'fox_girl':
-case 'kemonomimi':{
- waifudd = await axios.get(`https://nekos.life/api/v2/img/${command}`)
- arus.sendMessage(m.chat, { image: { url: waifudd.data.url }, caption: "Here you go" }, { quoted: m })
- }
-                break   
+                break                                
 case 'anime':
 if (!q) return m.reply(`❌ No query provided!`)
 const { data: jap } = await axios.get(`https://api.jikan.moe/v3/search/anime?q=${q}`)
