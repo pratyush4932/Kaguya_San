@@ -26,7 +26,7 @@ const user = require("./models/user")
 const bot = require("./models/bot")
 const group = require("./models/group")
 const { Sticker, createSticker, StickerTypes } = require('wa-sticker-formatter')
-Levels.setURL("mongodb+srv://abae:das1234@cluster0.lfp5z.mongodb.net/myFirstDatabase?retryWrites=true&w=majority")
+Levels.setURL("mongodb+srv://das:das@cluster0.wm7jv.mongodb.net/?retryWrites=true&w=majority")
 console.log("Connected to the database1")
 const canvacord=require('canvacord')
 const xfar = require("xfarr-api")
@@ -51,7 +51,8 @@ module.exports = arus = async (arus, m, chatUpdate, store) => {
         const botNumber = await arus.decodeJid(arus.user.id)
         const isCreator = [botNumber, ...global.owner].map(v => v.replace(/[^0-9]/g, '') + '@s.whatsapp.net').includes(m.sender)
         const itsMe = m.sender == botNumber ? true : false
-		const ter = body.slice(4) 
+		 const botName = process.env.NAME || "Mizuhara"
+		const ter = args.join(' ') 
         const contant = q = args.join(" ")
         const quoted = m.quoted ? m.quoted : m
         const mime = (quoted.msg || quoted).mimetype || ''
@@ -70,7 +71,7 @@ module.exports = arus = async (arus, m, chatUpdate, store) => {
         const mentionByTag = m.mtype == "extendedTextMessage" && m.message.extendedTextMessage.contextInfo != null ? m.message.extendedTextMessage.contextInfo.mentionedJid : []
        const mentionByReply = m.mtype == "extendedTextMessage" && m.message.extendedTextMessage.contextInfo != null ? m.message.extendedTextMessage.contextInfo.participant || "" : ""
         //db fetch
-
+if(icmd&&!isGroup) return m.reply("You cannot use any command in dm")
 
 if (icmd) {	
 
@@ -138,6 +139,7 @@ if (icmd) {
 		if (Igroup) {
 			let hh = Igroup.mod || "false"
     if (isGroup && hh == 'true') {
+		  if (isAdmins) return
       if (budy.includes("://chat.whatsapp.com/")) {
         if (isAdmins) return 
         m.reply("Group Link Detected!!");
@@ -178,7 +180,7 @@ let buttonMessaged = {
 
  await arus.sendMessage(m.chat,buttonMessaged,{quoted:m})
 }
- 
+ break
  
  case 'info':{
 	     const formater = (seconds) => {
@@ -217,7 +219,12 @@ console.log(ter)
 await arus.sendMessage(m.chat,buttonMessaged,{quoted:m})
 }
  break
-      
+       case 'grupinfo': case 'groupinfo': case 'group info' :
+const code = await arus.groupInviteCode(m.chat)
+let ingfo = `*━━━━『🍀Group-Info🍀』━━━━*\n\n*🎐Name:* ${groupName}\n\n*🔩ID Group:* ${m.chat}\n\n*🍀Made:* ${moment(`${groupMetadata.creation}` * 1000).tz('Asia/Kolkata').format('DD/MM/YYYY HH:mm:ss')}\n\n*🥇Group Owner:* @${groupMetadata.owner.split('@')[0]}\n\n*🔍Number Of Admins:* ${groupAdmins.length}\n\n*🎍Number Of Participants:* ${participants.length}\n\n*🔍Desc:* \n\n${groupMetadata.desc}`
+//m.reply(ingfo)
+arus.sendMessage(m.chat, { text: ingfo, mentions: [groupMetadata.owner]} , { quoted: m})
+break
 case 'pokemon': {
 if (!ter) return m.reply("❌ No query provided!")
 		try {
@@ -229,6 +236,38 @@ arus.sendMessage(m.chat, { image: { url: data.sprites.front_default }, caption: 
 m.reply("An Error Occurred")
 console.log(err)
 }
+}
+break
+		   case "h":
+		   case "help":
+		   case 'menu':{ 
+			   arus.sendMessage(m.chat, { text: menu, contextInfo:{"externalAdReply": {"title": `WhatsApp-Botto`,"body": ` Kaguya-san`, "previewType": "PHOTO","thumbnailUrl": ``,"thumbnail": { url: "https://i.pinimg.com/564x/f8/99/e7/f899e76bddaec08a2fbde9f27cf16dfb.jpg" },"sourceUrl": "https://kaguyasama-wa-kokurasetai.fandom.com/wiki/Kaguya_Shinomiya"}}}, { quoted: m})
+		   }
+			   break
+		   case 'session': {
+			   if (!isCreator) return m.reply("📍The user of this command must be the owner of the bot")
+			   const session = require(`./${sessionName}.json`)
+			   //console.log(session)
+			   let sess = JSON.stringify(session);
+			   m.reply(sess)
+			   
+	   }
+			   break
+		   case 'report': {
+			   const time = 100000;
+    const cd = await db.get(`${m.sender}report`)
+    if (time - (Date.now() - cd) > 0) {
+      return m.reply(
+        `You have recently reported your problem.`
+      );
+		if (!ter) return m.reply("❌ No query provided!")
+		   }
+		   }
+			   break
+			   case 'support':{
+	m.reply("The group link has been sent to you personal inbox")
+	arus.sendMessage(m.sender,{text:'https://chat.whatsapp.com/BncdJRVCfOAK1WSfe5DLNJ'},{quoted:m})
+	
 }
 break
     case'lead':
@@ -723,17 +762,12 @@ if (!isBotAdmins) return m.reply("❌ Cannot execute without being admin")
              } else if (args[0] === 'close'){
                 await arus.groupSettingUpdate(m.chat, 'announcement').then((res) => m.reply(`*Group closed*`)).catch((err) => m.reply(jsonformat(err)))
              } else {
-             let buttons = [
-                        { buttonId: `${prefix}group open`, buttonText: { displayText: 'Open' }, type: 1 },
-                        { buttonId: `${prefix}group close`, buttonText: { displayText: 'Close' }, type: 1 },
-                        { buttonId: `${prefix}linkgc`, buttonText: { displayText: 'Group link' }, type: 1 }
-                    ]
 					const sections = [
     {
 	title: "GROUP settings",
 	rows: [
-	    {title: "close", rowId: "=group close", description: "This will close the group"},
-	    {title: "open", rowId: "=group open", description: "This will open the group"}
+	    {title: "close", rowId: `${prefix}group close`, description: "This will close the group"},
+	    {title: "open", rowId: `${prefix}group open`, description: "This will open the group"}
 	]
     }
 ]
@@ -1145,6 +1179,12 @@ console.log(err)
 return m.reply (`Please give me valid insagram ID.`)
               }
 break
+			       case 'update': {
+					   if (!isCreator) return m.reply("📍The user of this command must be the owner of the bot")
+      stdout = execSync('git remote set-url origin https://github.com/Das-kun/Kaguya_San.git && git pull')
+      m.reply(stdout.toString())
+    }
+			   break
 case 'ship':{
 	const { Ship, IShipOptions } = require('@shineiichijo/canvas-chan')
 let usep = m.sender
@@ -1221,7 +1261,7 @@ rate = "Fated to be together"
         }
     ]
     const ship = await new Ship(options, ll, rate).build()
-	arus.sendMessage(m.chat,{image:ship,caption:caption},{quoted:m})
+	arus.sendMessage(m.chat,{image:ship,caption:caption,mentions:ment},{quoted:m})
 		}
 
 break
@@ -1607,9 +1647,9 @@ await arus.sendMessage(m.chat,{image:{url:cha[0].images.jpg.image_url},caption:d
 case 'manga':
 const { Manga } =require("@shineiichijo/marika")
 const manga = new Manga();
-if (!q) return m.reply(`❌ No query provided!`)
+if (!ter) return m.reply(`❌ No query provided!`)
 	try {
-let srh = await manga.searchManga(q)
+let srh = await manga.searchManga(ter)
 
     let mang = `🎀 *Title:* ${srh.data[0].title}\n`;
     mang += `📈 *Status:* ${srh.data[0].status}\n`;
@@ -1657,9 +1697,9 @@ const i = Math.floor(Math.random() * wallpaper.length);
 break
 
  case 'bc': case 'bcgroup': {
-    if (!isCreator&&!mods.includes(m.sender)) return m.reply("📍The user of this command must be the owner of the bot")
-                if (!q) return m.reply("❌ No query provided!")
-                const bct = body.slice(4)
+    if (!isCreator) return m.reply("📍The user of this command must be the owner of the bot")
+                if (!ter) return m.reply("❌ No query provided!")
+                const bct = ter
                 let getGroups = await arus.groupFetchAllParticipating()
                 let groups = Object.entries(getGroups).slice(0).map(entry => entry[1])
                 let anu = groups.map(v => v.id)
