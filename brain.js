@@ -182,6 +182,14 @@ let buttonMessaged = {
 }
  break
  
+
+case "react":
+case "r": {
+let react = "🍀 *Reaction*\n *pat, hug, kick, slap, kiss, cuddle*"
+m.reply(react)
+}
+break
+
  case 'info':{
 	     const formater = (seconds) => {
         const pad = (s) => {
