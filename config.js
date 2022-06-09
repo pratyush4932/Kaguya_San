@@ -3,58 +3,17 @@
 const fs = require('fs')
 const chalk = require('chalk')
 
-// Website Api
-global.APIs = {
-	zenz: 'https://zenzapi.xyz',
-}
-
-// Apikey Website Api
-global.APIKeys = {
-	'https://zenzapi.xyz': 'fa4d0aa17e',
-}
-
 // Other
-global.owner = ['917003213983']
-global.packname = 'Mizuhara'
-global.prefix= ['=']
-global.author = 'Arus'
-global.sessionName = 'arus'
-global.reac = {
-            cry:'Cried with',
-            kiss: 'Kissed',
-            bully:'Bullied',
-            hug:'Hugged',
-            lick:'Licked',
-            cuddle:'Cuddled with',
-            pat: 'Patted',
-            smug: 'Smugged at',
-            highfive: 'High-fived',
-            bonk:'Bonked',
-            yeet: 'Yeeted',
-            blush: 'Blushed at',
-            wave: 'Waved at',
-            smile: 'Smiled at',
-            handhold: 'is Holding Hands with',
-            nom: 'is Eating with',
-            bite:'Bit',
-            glomp:'Glomped',
-            kill: 'Killed',
-            slap: 'Slapped',
-            cringe: 'Cringed at',
-            kick: 'Kicked',
-            wink: 'Winked at',
-            happy: 'is Happy with',
-            poke: 'Poked',
-            dance:'is Dancing with'
-        }
-global.mess = {
-    success: '*Here you go...*',
-    admin: '*Oops!! sorry dude this is only for admins*',
-    botAdmin: '*To use this command make me admin if u trust me...*',
-    owner: '*Sorry!! this command is for my darling developers*',
-    group: '*Leave me here alone please...*',
-    wait: '*Loading... please wait*',
+let gg = process.env.MODS
+if (!gg) {
+	gg = "917003213983"
 }
+global.owner = gg.split(",");
+global.packname = process.env.PACKNAME || "kaguya",
+global.prefix= process.env.PREFIX || "-",
+global.author = process.env.AUTHOR || "ARUS",
+global.sessionName = 'arus'
+global.menu = '🎫 *Kaguya-San\'s Command Liste* 🎫\n\n💻 *Dev*\n❐ ```update, broadcast, ban, unban, chatid, session, join```\n\n🔮 *General*\n❐ ```groupinfo, help, delete, info, rank, profile```\n\n💠 *Fun*\n❐ ```ship, quote, leaderboard,react, fact, bot```\n\n🔈 *Media*\n❐ ```yta, ytv, play, gify, yts, lyrics```\n\n👑 *Moderation*\n❐ ```demote, remove, ping, promote, deact, act, invite, group, seticon, setdesc```\n\n💮 *Weeb*\n❐ ```anime, manga, charecter, haigusha, neko, pokemon, holo, fox_girl, kemonomimi```\n\n🖇 *Utils*\n❐ ```google, image, meme, subreddit, tourl, img, iguser, gif, sticker, take, pinterest, carbon```\n\n🗃️ *Notiz: Nutze -report <text> report the bug if you use it more then 5 times in a row you will be ban*'
 global.thumb = fs.readFileSync('./src/info.jpeg')
 
 let file = require.resolve(__filename)
