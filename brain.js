@@ -172,7 +172,7 @@ case '':
 {buttonId: `${prefix}info`, buttonText: {displayText: 'Bot status'}, type: 1}
 ]
 let buttonMessaged = {
-        text: `Hey *${pushname}* it's Mizuhara. Do you mean: !help`,
+        text: `Hey *${pushname}* I am Kaguya. Do you mean: ${prefix}help`,
         footer: '@ARUS',
         buttons: dbut,
         headerType: 4
@@ -241,8 +241,8 @@ break
 		   case "h":
 		   case "help":
 		   case 'menu':{ 
-			   arus.sendMessage(m.chat, { text: menu, contextInfo:{"externalAdReply": {"title": `WhatsApp-Botto`,"body": ` Kaguya-san`, "previewType": "PHOTO","thumbnailUrl": ``,"thumbnail": { url: "https://i.pinimg.com/564x/f8/99/e7/f899e76bddaec08a2fbde9f27cf16dfb.jpg" },"sourceUrl": "https://kaguyasama-wa-kokurasetai.fandom.com/wiki/Kaguya_Shinomiya"}}}, { quoted: m})
-		   }
+			     arus.sendMessage(m.chat, { text: menu, contextInfo:{"externalAdReply": {"title": `WhatsApp-Botto`,"body": ` Kaguya-san`, "previewType": "PHOTO","thumbnailUrl": ``,"thumbnail": await getBuffer("https://i.pinimg.com/564x/f8/99/e7/f899e76bddaec08a2fbde9f27cf16dfb.jpg"),"sourceUrl": "https://kaguyasama-wa-kokurasetai.fandom.com/wiki/Kaguya_Shinomiya"}}}, { quoted: m})
+ }
 			   break
 		   case 'session': {
 			   if (!isCreator) return m.reply("📍The user of this command must be the owner of the bot")
