@@ -1047,12 +1047,18 @@ break
 case 'sr':
 case 'subraddit': {
 	if (!ter) return m.reply(`❌ No query provided!`)
+try{
 							let Igroup = await group.findOne({ id: m.chat})
 				let hh = Igroup.nsfw || "false"
 				const res = await axios.get('https://meme-api.herokuapp.com/gimme/' + q + '/');
 	if (res.data.nsfw&& hh == 'false') return m.reply("❌ *nsfw* is not active in this group")
-		if (res.data.code == 400) return m.reply("Subraddit dosen't exsist") 
+		//if (res.data.code == 400) return m.reply("Subraddit dosen't exsist") 
 				arus.sendMessage(m.chat,{image:{url: res.data.url},caption:`🖌️ *Title:* ${res.data.title}\n*👨‍🎨 Author:* ${res.data.author}\n*🎏 Subreddit:* ${res.data.subreddit}\n🌐 *Post:* ${res.data.postLink}`},{quoted:m,})
+catch{
+
+return m.reply("Subraddit dosen't exsist") 
+
+}
 				
 }
 break
