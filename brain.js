@@ -1054,7 +1054,8 @@ try{
 	if (res.data.nsfw&& hh == 'false') return m.reply("❌ *nsfw* is not active in this group")
 		//if (res.data.code == 400) return m.reply("Subraddit dosen't exsist") 
 				arus.sendMessage(m.chat,{image:{url: res.data.url},caption:`🖌️ *Title:* ${res.data.title}\n*👨‍🎨 Author:* ${res.data.author}\n*🎏 Subreddit:* ${res.data.subreddit}\n🌐 *Post:* ${res.data.postLink}`},{quoted:m,})
-catch{
+
+} catch {
 
 return m.reply("Subraddit dosen't exsist") 
 
