@@ -10,17 +10,18 @@ const qrcode = require("qrcode");
 const express = require("express");
 const CFonts=require('cfonts')
 const FileType = require('file-type')
+const moment = require('moment-timezone')
 const mongoose = require('mongoose');
 main().catch(err => console.log(err));
 
 async function main() {
-  await mongoose.connect('mongodb+srv://abae:das1234@cluster0.lfp5z.mongodb.net/myFirstDatabase?retryWrites=true&w=majority');
+  await mongoose.connect('mongodb+srv://das:das@cluster0.wm7jv.mongodb.net/?retryWrites=true&w=majority');
 }
 const user = require("./models/user")
 const group = require("./models/group")
 //const usere = JSON.parse(fs.readFileSync('./lib/user.json'))
 const { smsg, formatp,  formatDate, getTime, isUrl, clockString, runtime, fetchJson, getBuffer, jsonformat, format, parseMention,GIFBufferToVideoBuffer, getRandom, await, sleep, getSizeMedia, generateMessageTag } = require('./lib/myfunc')
-const canvas = require('discord-canvas')
+const Canvas = require('discord-canvas')
 const path = require('path');                               
 const PhoneNumber = require('awesome-phonenumber')
 const { imageToWebp, videoToWebp, writeExifImg, writeExifVid } = require('./lib/exif')
@@ -113,27 +114,9 @@ try {
                 
 if (grp.action == 'add' && hh == "true") {
 	let name = arus.getName(num)
-		let disc = num.substring(3, 7)
-			const welcome = await new Canvas.Welcome()
-				.setUsername(num)
-				.setDiscriminator(disc)
-				.setMemberCount(participants.length)
-				.setGuildName(groupName)
-				.setAvatar(ppuser)
-				.setColor("border", "#FFC0CB")
-				.setColor("username-box", "#FFFFFF")
-				.setColor("discriminator-box", "#FFFFFF")
-				.setColor("message-box", "#FFFFFF")
-				.setColor("title", "#FFFFFF")
-				.setColor("avatar", "#00FF00")
-				.setText("member-count", `- ${participants.length} member !`)
-				.setText("title", "hello")
-				.setText("message", `welcome to ${groupName}`)
-				.setBackground("https://d2y6mqrpjbqoe6.cloudfront.net/image/upload/f_auto,q_auto/cdn1/press/sleepy-princess/stills-copyright-01.jpg")
-				.toAttachment();
-				let img = await welcome.toBuffer()
-                    const des=`*━━━━『🍀WELCOME🍀』━━━━*\n\n*🎐Name:* ${groupName}\n\n*🔩ID Group:* ${m.chat}\n\n*🍀Made:* ${moment(`${metadata.creation}` * 1000).tz('Asia/Kolkata').format('DD/MM/YYYY HH:mm:ss')}\n\n*🥇Group Owner:* @${metadata.owner.split('@')[0]}\n\n*🔍Number Of Admins:* ${groupAdmins.length}\n\n*🎍Number Of Participants:* ${participants.length}\n\n*🔍Desc:* \n\n${metadata.desc}\n\n*`
-						arus.sendMessage(grp.id,{image: img,contextInfo: { mentionedJid: [num] },caption:des})
+
+                    const des=`*━━━━『🍀WELCOME🍀』━━━━*\n\n*🎐Name:* ${groupName}\n\n*🔩ID Group:* ${grp.id}\n\n*🍀Made:* ${moment(`${metadata.creation}` * 1000).tz('Asia/Kolkata').format('DD/MM/YYYY HH:mm:ss')}\n\n*🔍Number Of Admins:* ${groupAdmins.length}\n\n*🎍Number Of Participants:* ${participants.length}\n\n*🔍Desc:* \n\n${metadata.desc}\n\n*`
+						arus.sendMessage(grp.id,{image: {url: ppgroup},contextInfo: { mentionedJid: [num] },caption:des})
                 }    				
          if (grp.action == 'remove' && hh == "true") {
                     arus.sendMessage(grp.id, { image: { url: ppuser }, contextInfo: { mentionedJid: [num] }, caption: `@${num.split("@")[0]} left from ${metadata.subject}` })
