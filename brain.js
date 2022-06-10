@@ -227,17 +227,7 @@ console.log(ter)
 await arus.sendMessage(m.chat,buttonMessaged,{quoted:m})
 }
  break
-       case 'grupinfo': case 'groupinfo': case 'group info' :
-	   try {
-	    owne = groupMetadata.owner.split('@')[0]
-	   } catch {
-		    owne = ''
-	   }
-const code = await arus.groupInviteCode(m.chat)
-let ingfo = `*━━━━『🍀Group-Info🍀』━━━━*\n\n*🎐Name:* ${groupName}\n\n*🔩ID Group:* ${m.chat}\n\n*🍀Made:* ${moment(`${groupMetadata.creation}` * 1000).tz('Asia/Kolkata').format('DD/MM/YYYY HH:mm:ss')}\n\n*🥇Group Owner:* @${owne}\n\n*🔍Number Of Admins:* ${groupAdmins.length}\n\n*🎍Number Of Participants:* ${participants.length}\n\n*🔍Desc:* \n\n${groupMetadata.desc}`
-//m.reply(ingfo)
-arus.sendMessage(m.chat, { text: ingfo, mentions: [groupMetadata.owner]} , { quoted: m})
-break
+       
 case 'pokemon': {
 if (!ter) return m.reply("❌ No query provided!")
 		try {
