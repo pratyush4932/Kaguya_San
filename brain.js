@@ -1241,7 +1241,7 @@ rate = "Good"
 else if ( ll > 90 ){
 jj = `\t\t\t\t\t*ShipCent : ${ll}%* \n\tAmazing! You two will be a good couple💖`
 rate = "Amazing"
-} else {
+} else if ( ll == 100 ){ {
 jj = `\t\t\t\t\t*ShipCent : ${ll}%* \n\tYou two are fated to be together💙`
 rate = "Fated to be together"
 }
