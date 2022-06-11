@@ -1218,11 +1218,23 @@ if ( ll < 30 ){
 jj = `\t\t\t\t\t*ShipCent : ${ll}%* \n\t\tThere's still time to reconsider your choices`
 rate = "Not Good"
 }
+else if ( ll < 40 ){
+jj = `\t\t\t\t\t*ShipCent : ${ll}%* \n\t\tThere's still time to reconsider your choices`
+rate = "Not Good"
+}
 else if ( ll > 50 ){
 jj = `\t\t\t\t\t*ShipCent : ${ll}%* \n\t\t Good enough, I guess!💫`
 rate = "Avarage"
 }
+else if ( ll > 60 ){
+jj = `\t\t\t\t\t*ShipCent : ${ll}%* \n\t\t Good enough, I guess!💫`
+rate = "Avarage"
+}
 else if ( ll > 70 ){
+jj = `\t\t\t\t\t*ShipCent : ${ll}%* \n\t\t\tStay together and you'll find a way⭐️`
+rate = "Good"
+}
+else if ( ll > 80 ){
 jj = `\t\t\t\t\t*ShipCent : ${ll}%* \n\t\t\tStay together and you'll find a way⭐️`
 rate = "Good"
 }
