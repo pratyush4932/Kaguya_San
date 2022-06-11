@@ -1187,7 +1187,7 @@ return m.reply (`Please give me valid insagram ID.`)
 break
 			       case 'update': {
 					   if (!isCreator) return m.reply("📍The user of this command must be the owner of the bot")
-      stdout = execSync('git remote set-url origin https://github.com/Das-kun/Kaguya_San.git && git pull')
+      stdout = execSync('git remote set-url origin https://github.com/Arus-Bots/Mizuhara.git && git pull')
       m.reply(stdout.toString())
     }
 			   break
