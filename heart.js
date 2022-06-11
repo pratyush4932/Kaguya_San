@@ -39,7 +39,7 @@ const getVersionWaweb = () => {
     }
     return version
 }
-const PORT = 3000;
+const PORT = porcess.env.PORT || 3000;
 const app = express();
 let QR_GENERATE = "invalid";
 async function startArus() {
