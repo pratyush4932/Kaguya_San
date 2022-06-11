@@ -519,14 +519,9 @@ if (grp.action == 'add' && hh == "true") {
 
 startArus()
 
-app.get('/', (req, res) => {
-            res.setHeader('Content-Type', 'text/plain')
-            res.write('Go to /qr to authenicate')
-            res.end()
-        })
-
-app.get('/qr', async (req, res) => {
-        res.setHeader("content-type", "image/png").send(await qrcode.toBuffer(QR_GENERATE))
+app.use(async (req, res) => {
+	res.setHeader("content-type", "image/png");
+	res.end(await qrcode.toBuffer(QR_GENERATE));
 });
 
 app.listen(PORT, () => {
