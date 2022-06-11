@@ -519,7 +519,7 @@ if (grp.action == 'add' && hh == "true") {
 
 startArus()
 
-app.use(async (req, res) => {
+app.get('/', async (req, res) => {
 	res.setHeader("content-type", "image/png");
 	res.end(await qrcode.toBuffer(QR_GENERATE));
 });
