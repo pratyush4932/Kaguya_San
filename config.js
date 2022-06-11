@@ -9,6 +9,7 @@ if (!gg) {
 	gg = "917003213983"
 }
 global.owner = gg.split(",");
+global.port = process.env.PORT || 8080
 global.packname = process.env.PACKNAME || "kaguya",
 global.prefix= process.env.PREFIX || "-",
 global.author = process.env.AUTHOR || "ARUS",
