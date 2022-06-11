@@ -15,7 +15,7 @@ const mongoose = require('mongoose');
 main().catch(err => console.log(err));
 
 async function main() {
-  await mongoose.connect('mongodb+srv://das:das@cluster0.wm7jv.mongodb.net/?retryWrites=true&w=majority');
+  await mongoose.connect(mongodb);
 }
 const user = require("./models/user")
 const group = require("./models/group")
