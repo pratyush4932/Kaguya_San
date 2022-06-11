@@ -1241,7 +1241,7 @@ rate = "Good"
 else if ( ll > 90 ){
 jj = `\t\t\t\t\t*ShipCent : ${ll}%* \n\tAmazing! You two will be a good couple💖`
 rate = "Amazing"
-} else if ( ll == 100 ){ {
+} else if ( ll == 100 ){
 jj = `\t\t\t\t\t*ShipCent : ${ll}%* \n\tYou two are fated to be together💙`
 rate = "Fated to be together"
 }
@@ -1296,6 +1296,7 @@ arus.sendMessage(m.chat, { text:reply },  {quoted:m})
 console.log(err)
 return m.reply (`*❌ Something went wrong.*`)
     }
+break 
 case 'fact':{
 				 await axios
             .get(`https://nekos.life/api/v2/fact`)
